@@ -1,23 +1,6 @@
-import React from 'react';
-import CSSModules from 'react-css-modules';
+class Request {
 
-
-let css = {}
-
-
-// Home page component
-class Home extends React.Component {
-  constructor(props) {
-	    super(props);
-
-	    this.state = {
-	    	topics: []
-	    }
-
-	    this.fetchPosts();
-	}
-
-  async request(url, config = {}) {
+  async main(url, config = {}) {
     if (!config.method) {
       config.method = 'GET'
     }  
@@ -51,22 +34,6 @@ class Home extends React.Component {
       }
     });
   }
-
-	async fetchPosts() {
-		let posts = await this.request('/posts');
-
-
-
-	}
-
-	render() {
-		return (
-			<div>jfdljafls</div>
-		);
-	}
 }
 
-
-
-
-export default CSSModules(Home, css);
+export default new Request();
