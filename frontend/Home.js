@@ -68,7 +68,10 @@ class Home extends React.Component {
   }
 
   async onSubmit () {
-    console.log("HI", this.state.text)
+    if (!this.state.text || this.state.text.length > 255) {
+      return;
+    }
+
 
     await this.request('/newPost', {
         text: this.state.text,
@@ -99,6 +102,21 @@ class Home extends React.Component {
   }
 
   render() {
+
+    // Sort the topics. 
+    let sortedTopics = this.state.topics.sort(function (a, b) {
+      if (a.score > b.score) {
+        return -1
+      }
+      else if (a.score < b.score) {
+        return 1
+      }
+      else {
+        return 0
+      }
+    })
+
+
     return (
       <div>
         <Navbar>
