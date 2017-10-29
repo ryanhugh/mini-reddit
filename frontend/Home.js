@@ -49,8 +49,8 @@ class Home extends React.Component {
 
       xmlhttp.open(method, url, true);
       xmlhttp.setRequestHeader('Content-Type', 'application/json')
-      if (config.body) {
-        xmlhttp.send(JSON.stringify(config.body));
+      if (body) {
+        xmlhttp.send(JSON.stringify(body));
       } else {
         xmlhttp.send();
       }
