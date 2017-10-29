@@ -2,25 +2,25 @@ import React from 'react';
 import CSSModules from 'react-css-modules';
 
 
-let css = {}
+const css = {};
 
 
 // Home page component
 class Home extends React.Component {
   constructor(props) {
-	    super(props);
+    super(props);
 
-	    this.state = {
-	    	topics: []
-	    }
+    this.state = {
+      topics: [],
+    };
 
-	    this.fetchPosts();
-	}
+    this.fetchPosts();
+  }
 
   async request(url, config = {}) {
     if (!config.method) {
-      config.method = 'GET'
-    }  
+      config.method = 'GET';
+    }
 
     return new Promise((resolve, reject) => {
       const xmlhttp = new XMLHttpRequest();
@@ -29,11 +29,9 @@ class Home extends React.Component {
           return;
         }
 
-        const requestTime = Date.now() - startTime;
-
         if (xmlhttp.status !== 200) {
-          console.error("There was an error downloading", url, config)
-          reject(err);
+          console.error('There was an error downloading', url, config);
+          reject();
           return;
         }
 
@@ -43,30 +41,24 @@ class Home extends React.Component {
       };
 
       xmlhttp.open(config.method, url, true);
-      if (config.body && config.method == "POST") {
+      if (config.body && config.method === 'POST') {
         xmlhttp.send(config.body);
-      }
-      else {
+      } else {
         xmlhttp.send();
       }
     });
   }
 
-	async fetchPosts() {
-		let posts = await this.request('/posts');
+  async fetchPosts() {
+    const posts = await this.request('/posts');
+  }
 
-
-
-	}
-
-	render() {
-		return (
-			<div>jfdljafls</div>
-		);
-	}
+  render() {
+    return (
+      <div>jfdljafls</div>
+    );
+  }
 }
-
-
 
 
 export default CSSModules(Home, css);

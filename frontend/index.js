@@ -7,7 +7,7 @@ import Home from './Home';
 const root = document.getElementById('app');
 function createApp() {
   return (
-     <Home />
+    <Home />
   );
 }
 
