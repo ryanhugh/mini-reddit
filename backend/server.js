@@ -45,10 +45,56 @@ app.use(function (req, res, next) {
 }.bind(this))
 
 
+// This is a list of all the topics. They are kept in order that they are added
+let topics = []
 
-app.post('/newUser', function (req, res) {
-  
+
+// Could optimize for either upvotes and downvotes (hash map/list where nothing moves) to make vote changing O(1) but would have to sort every render O(n*log(n))
+// Could also optimize for sorting (keep topics sorted) but then voting would be complicated (O(n) to find the topic and then worst case O(n) to insert this topic into the correct spot)
+// Additional features, such as the ability to exit topics, would be easier 
+
+app.post('/newPost', function (req, res) {
+  if (req.body.text === undefined) {
+    res.send("Invalid text.")
+    return;
+  }
+
+  topics.push({
+    text: req.body.text,
+    score: 0,
+    id: topics.lenght
+  })
+  res.send(JSON.stringify({status:'OK'}))
 })
+
+
+app.post('/upvote', function (req, res) {
+  if (req.body.id === undefined || !topics[req.body.id]) {
+    res.send("Invalid id.")
+    return;
+  }
+
+  topics[req.body.id].score ++;
+  res.send(JSON.stringify({status:'OK'}))
+
+})
+
+
+app.post('/downvote', function (req, res) {
+  if (req.body.id === undefined || !topics[req.body.id]) {
+    res.send("Invalid id.")
+    return;
+  }
+
+  topics[req.body.id].score --;
+  res.send(JSON.stringify({status:'OK'}))
+})
+
+
+app.get('/posts', function (req, res) {
+  res.send(JSON.stringify(topics))
+})
+
 
 
 
@@ -88,7 +134,7 @@ app.get('*', (req, res) => {
 });
 
 
-// your express error handler
+// Express error handler for invalid URLs
 app.use(function(err, req, res, next) {
     // in case of specific URIError
     if (err instanceof URIError) {
