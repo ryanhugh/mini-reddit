@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should be able to downvote and upvote a topic 1`] = `
+Array [
+  Object {
+    "id": 0,
+    "score": -1,
+    "text": "Hi there.",
+  },
+  Object {
+    "id": 1,
+    "score": 0,
+    "text": "Hi there again.",
+  },
+]
+`;
