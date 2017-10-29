@@ -1,9 +1,11 @@
 import React from 'react';
 import CSSModules from 'react-css-modules';
+import { Panel, Navbar, FormControl , Button  } from 'react-bootstrap';
+import css from './Home.css'
 
-
-const css = {};
-
+// These were taken from here: https://www.iconfinder.com/search/?q=arrow
+import down from './down.svg'
+import up from './up.svg'
 
 // Home page component
 class Home extends React.Component {
@@ -12,16 +14,18 @@ class Home extends React.Component {
 
     this.state = {
       topics: [],
+      input: ''
     };
 
-    this.fetchPosts();
+    this.onSubmit = this.onSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.upvote = this.upvote.bind(this);
+    this.downvote = this.downvote.bind(this);
+
+    this.fetchTopics();
   }
 
-  async request(url, config = {}) {
-    if (!config.method) {
-      config.method = 'GET';
-    }
-
+  async request(url, body) {
     return new Promise((resolve, reject) => {
       const xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function onreadystatechange() {
@@ -30,32 +34,116 @@ class Home extends React.Component {
         }
 
         if (xmlhttp.status !== 200) {
-          console.error('There was an error downloading', url, config);
+          console.error('There was an error downloading', url, body);
           reject();
           return;
         }
 
-        const response = JSON.parse(xmlhttp.response);
-
-        resolve(response);
+        resolve(JSON.parse(xmlhttp.response));
       };
 
-      xmlhttp.open(config.method, url, true);
-      if (config.body && config.method === 'POST') {
-        xmlhttp.send(config.body);
+      let method = 'GET'
+      if (body) {
+        method = 'POST'
+      }
+
+      xmlhttp.open(method, url, true);
+      xmlhttp.setRequestHeader('Content-Type', 'application/json')
+      if (config.body) {
+        xmlhttp.send(JSON.stringify(config.body));
       } else {
         xmlhttp.send();
       }
     });
   }
 
-  async fetchPosts() {
-    const posts = await this.request('/posts');
+  async fetchTopics() {
+    const topics = await this.request('/topics');
+
+    this.setState({
+      topics: topics
+    })
+
+    console.log(topics)
+  }
+
+  async onSubmit () {
+    console.log("HI", this.state.text)
+
+    await this.request('/newPost', {
+        text: this.state.text,
+    })
+
+    this.fetchTopics();
+  }
+
+  handleChange(e) {
+    this.setState({ text: e.target.value });
+  }
+
+  async upvote(id) {
+    await this.request('/upvote', {
+        id: id
+    })
+
+
+    this.fetchTopics();
+  }
+  async downvote(id) {
+    await this.request('/downvote', {
+        id: id
+    })
+
+
+    this.fetchTopics();
   }
 
   render() {
     return (
-      <div>jfdljafls</div>
+      <div>
+        <Navbar>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="#">Mini Reddit</a>
+            </Navbar.Brand>
+          </Navbar.Header>
+        </Navbar>
+
+        <div className="container bs-docs-container bs-docs-single-col-container">
+
+          <form className={css.form}>
+            <FormControl
+              className={css.input}
+              type="text"
+              placeholder="Enter text"
+              onChange={this.handleChange}
+            />
+           
+            <Button onClick={this.onSubmit} className={css.submitButton}>
+              Submit
+            </Button>
+          </form>
+
+          {this.state.topics.map((topic) => {
+            return (
+              <Panel key={topic.id}>
+                <span className={css.score}>
+                  {topic.score}
+                </span>
+
+                <span className={css.imgContainer}>
+                  <img src={up} className={css.arrowUp} onClick={this.upvote.bind(this, topic.id)}/>
+                  <img src={down} className={css.arrowDown} onClick={this.downvote.bind(this, topic.id)}/>
+                </span>
+
+                <span className={css.text}>
+                  {topic.text}
+                </span>
+              </Panel>
+              )
+          })}
+        </div>
+      </div>
     );
   }
 }

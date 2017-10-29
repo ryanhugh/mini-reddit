@@ -62,7 +62,7 @@ app.post('/newPost', function (req, res) {
   topics.push({
     text: req.body.text,
     score: 0,
-    id: topics.lenght
+    id: topics.length
   })
   res.send(JSON.stringify({status:'OK'}))
 })
@@ -91,7 +91,7 @@ app.post('/downvote', function (req, res) {
 })
 
 
-app.get('/posts', function (req, res) {
+app.get('/topics', function (req, res) {
   res.send(JSON.stringify(topics))
 })
 
