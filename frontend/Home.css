@@ -1,46 +1,48 @@
+/*
+ Main css file for the frontend. These styles are used in Home.js
+*/
+
 .input {
-    display: inline-block;
-    max-width: 80%;
-    margin-right: 12px;
-    vertical-align: middle;
+  display: inline-block;
+  max-width: 80%;
+  margin-right: 12px;
+  vertical-align: middle;
 }
 
 .submitButton {
-	display: inline-block;
+  display: inline-block;
 }
 
 .imgContainer {
-	height: 43px;
-    max-width: 32px;
-    display: inline-block;
+  height: 43px;
+  max-width: 32px;
+  display: inline-block;
 }
 
 .arrowUp {
-	margin-bottom: -5px;
-    margin-top: -5px;
+  margin-bottom: -5px;
+  margin-top: -5px;
 }
 
 .arrowDown {
-	margin-bottom: -5px;
-    margin-top: -5px;
+  margin-bottom: -5px;
+  margin-top: -5px;
 }
 
-
 .form {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .score {
-	vertical-align: text-bottom; 
-	font-size: 24px;
-    min-width: 26px;
-    display: inline-block;
-    text-align: right;
+  vertical-align: text-bottom;
+  font-size: 24px;
+  min-width: 26px;
+  display: inline-block;
+  text-align: right;
 }
 
 .text {
-	vertical-align: text-bottom; 
-	font-size: 24px;
-	padding-left: 10px;
+  vertical-align: text-bottom;
+  font-size: 24px;
+  padding-left: 10px;
 }
-

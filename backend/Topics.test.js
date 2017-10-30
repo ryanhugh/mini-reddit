@@ -1,5 +1,6 @@
 import Topics from './Topics';
 
+// Unit tests for the Topics class. 
 
 it('should be able to add a topic', () => {
   const instance = new Topics();

@@ -25,8 +25,11 @@ async function request(url, body) {
       method = 'POST';
     }
 
+    // Send the request
     xmlhttp.open(method, url, true);
     if (body) {
+
+      // Add a application/json header if this request is a post request. 
       xmlhttp.setRequestHeader('Content-Type', 'application/json');
       xmlhttp.send(JSON.stringify(body));
     } else {

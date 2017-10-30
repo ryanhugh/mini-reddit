@@ -4,7 +4,7 @@ import { Panel, Navbar, FormControl, Button } from 'react-bootstrap';
 import css from './Home.css';
 import request from './request';
 
-// These SVG files were taken from here: https://www.iconfinder.com/search/?q=arrow
+// These SVG files were downloaded from here: https://www.iconfinder.com/search/?q=arrow
 import down from './down.svg';
 import up from './up.svg';
 
