@@ -1,3 +1,8 @@
+
+// This file is a small wrapper around window.XMLHttpRequest 
+// This file assumes that every post request sends and receives JSON
+// and that every GET request receives JSON from the server. 
+
 class Request {
 
   async main(url, body) {
@@ -23,8 +28,8 @@ class Request {
       }
 
       xmlhttp.open(method, url, true);
-      xmlhttp.setRequestHeader('Content-Type', 'application/json')
       if (body) {
+        xmlhttp.setRequestHeader('Content-Type', 'application/json')
         xmlhttp.send(JSON.stringify(body));
       } else {
         xmlhttp.send();

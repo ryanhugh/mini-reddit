@@ -4,7 +4,7 @@ import { Panel, Navbar, FormControl , Button  } from 'react-bootstrap';
 import css from './Home.css'
 import request from './request'
 
-// These were taken from here: https://www.iconfinder.com/search/?q=arrow
+// These SVG files were taken from here: https://www.iconfinder.com/search/?q=arrow
 import down from './down.svg'
 import up from './up.svg'
 
@@ -13,20 +13,25 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
 
+    // Keep track of the state of this component. 
+    // Topics is the array of topics retrieved from the server.
+    // Input is the current value of the text box. 
     this.state = {
       topics: [],
       input: ''
     };
 
+    // Bind methods so 'this' references the instance of Home
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.upvote = this.upvote.bind(this);
     this.downvote = this.downvote.bind(this);
 
+    // Start by downloading all the topics from the server
     this.fetchTopics();
   }
 
-
+  // Download all the topics from the server. 
   async fetchTopics() {
     const topics = await request.main('/topics');
 
@@ -35,11 +40,11 @@ class Home extends React.Component {
     })
   }
 
+  // Verifies that the post if valid and then uploads it to the server. 
   async onSubmit () {
     if (!this.state.text || this.state.text.length > 255) {
       return;
     }
-
 
     await request.main('/newPost', {
         text: this.state.text,
@@ -48,10 +53,12 @@ class Home extends React.Component {
     this.fetchTopics();
   }
 
+  // Updates this.state.text with the value from the text box. 
   handleChange(e) {
     this.setState({ text: e.target.value });
   }
 
+  // Tells the server to upvote a post
   async upvote(id) {
     await request.main('/upvote', {
         id: id
@@ -60,6 +67,8 @@ class Home extends React.Component {
 
     this.fetchTopics();
   }
+
+  // Tells the server to downvote a post
   async downvote(id) {
     await request.main('/downvote', {
         id: id
@@ -69,6 +78,7 @@ class Home extends React.Component {
     this.fetchTopics();
   }
 
+  // Renders the page. 
   render() {
     if (!this.state.topics) {
       return;
