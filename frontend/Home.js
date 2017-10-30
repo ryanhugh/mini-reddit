@@ -15,17 +15,16 @@ class Home extends React.Component {
 
     // Keep track of the state of this component.
     // Topics is the array of topics retrieved from the server.
-    // Input is the current value of the text box.
     this.state = {
       topics: [],
-      input: '',
     };
 
     // Bind methods so 'this' references the instance of Home
     this.onSubmit = this.onSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.upvote = this.upvote.bind(this);
     this.downvote = this.downvote.bind(this);
+
+    this.textBox = null;
 
     // Start by downloading all the topics from the server
     this.fetchTopics();
@@ -34,13 +33,16 @@ class Home extends React.Component {
 
   // Verifies that the post if valid and then uploads it to the server.
   async onSubmit() {
-    if (!this.state.text || this.state.text.length > 255) {
+    if (!this.textBox.value || this.textBox.value.length > 255) {
       return;
     }
 
     await request('/newPost', {
-      text: this.state.text,
+      text: this.textBox.value,
     });
+
+    // Reset the contents of the text box;
+    this.textBox.value = '';
 
     this.fetchTopics();
   }
@@ -71,11 +73,6 @@ class Home extends React.Component {
     this.setState({
       topics: sortedTopics,
     });
-  }
-
-  // Updates this.state.text with the value from the text box.
-  handleChange(e) {
-    this.setState({ text: e.target.value });
   }
 
   // Tells the server to upvote a post
@@ -122,7 +119,7 @@ class Home extends React.Component {
               className={ css.input }
               type='text'
               placeholder='Enter text'
-              onChange={ this.handleChange }
+              inputRef = {(textBox) => {this.textBox = textBox}}
             />
 
             <Button onClick={ this.onSubmit } className={ css.submitButton }>
