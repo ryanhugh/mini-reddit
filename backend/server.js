@@ -122,7 +122,7 @@ app.use(express.static('public'));
 app.get('*', (req, res) => {
   res.setHeader("Content-Type", "text/html; charset=UTF-8");
   if (process.env.PROD) {
-    res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
+    res.sendFile(path.join(process.cwd(), '..', 'public', 'index.html'));
   }
   else {
     res.write(middleware.fileSystem.readFileSync(path.join(webpackConfig.output.path, 'index.html')));
