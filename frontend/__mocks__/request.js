@@ -1,45 +1,39 @@
 
 
-class MockRequest {
 
-  constructor(props) {
+let data = [{"text":"f","score":1,"id":0},{"text":"Two","score":2,"id":1},{"text":"Three","score":3,"id":2}]
 
-    this.data = [{"text":"f","score":1,"id":0},{"text":"Two","score":2,"id":1},{"text":"Three","score":3,"id":2}]
+async function mockRequest(url, body) {
+
+  if (url === '/topics') {
+    return data
   }
 
-  async main(url, body) {
-
-    if (url === '/topics') {
-      return this.data
+  else if (url == '/downvote') {
+    if (!data[body.id]) {
+      console.trace('Invalid id', body.id)
+      return;
     }
 
-    else if (url == '/downvote') {
-      if (!this.data[body.id]) {
-        console.trace('Invalid id', body.id)
-        return;
-      }
+    data[body.id].score --;
+  }
 
-      this.data[body.id].score --;
+  else if (url == '/upvote') {
+    if (!data[body.id]) {
+      console.trace('Invalid id', body.id)
+      return;
     }
 
-    else if (url == '/upvote') {
-      if (!this.data[body.id]) {
-        console.trace('Invalid id', body.id)
-        return;
-      }
-
-      this.data[body.id].score ++;
-    }
-    else if (url == '/newPost') {
-      this.data.push({
-        text: body.text,
-        score: 0,
-        id: this.data.lenght - 1
-      })
-    }
+    data[body.id].score ++;
+  }
+  else if (url == '/newPost') {
+    data.push({
+      text: body.text,
+      score: 0,
+      id: data.lenght - 1
+    })
   }
 }
 
 
-
-export default new MockRequest();
+export default mockRequest;

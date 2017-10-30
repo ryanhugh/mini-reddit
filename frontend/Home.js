@@ -33,7 +33,7 @@ class Home extends React.Component {
 
   // Download all the topics from the server. 
   async fetchTopics() {
-    const topics = await request.main('/topics');
+    const topics = await request('/topics');
 
     this.setState({
       topics: topics
@@ -46,7 +46,7 @@ class Home extends React.Component {
       return;
     }
 
-    await request.main('/newPost', {
+    await request('/newPost', {
         text: this.state.text,
     })
 
@@ -60,7 +60,7 @@ class Home extends React.Component {
 
   // Tells the server to upvote a post
   async upvote(id) {
-    await request.main('/upvote', {
+    await request('/upvote', {
         id: id
     })
 
@@ -70,7 +70,7 @@ class Home extends React.Component {
 
   // Tells the server to downvote a post
   async downvote(id) {
-    await request.main('/downvote', {
+    await request('/downvote', {
         id: id
     })
 
