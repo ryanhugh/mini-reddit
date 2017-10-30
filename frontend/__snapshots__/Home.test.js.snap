@@ -13,7 +13,7 @@ exports[`can downvote a post 1`] = `
       >
         <a
           className="navbar-brand"
-          href="#"
+          href="/#"
         >
           Mini Reddit
         </a>
@@ -29,7 +29,6 @@ exports[`can downvote a post 1`] = `
       <input
         className="input form-control"
         id={undefined}
-        onChange={[Function]}
         placeholder="Enter text"
         type="text"
       />
@@ -59,7 +58,7 @@ exports[`can downvote a post 2`] = `
       >
         <a
           className="navbar-brand"
-          href="#"
+          href="/#"
         >
           Mini Reddit
         </a>
@@ -75,7 +74,6 @@ exports[`can downvote a post 2`] = `
       <input
         className="input form-control"
         id={undefined}
-        onChange={[Function]}
         placeholder="Enter text"
         type="text"
       />
@@ -105,7 +103,7 @@ exports[`can upvote a post 1`] = `
       >
         <a
           className="navbar-brand"
-          href="#"
+          href="/#"
         >
           Mini Reddit
         </a>
@@ -121,7 +119,6 @@ exports[`can upvote a post 1`] = `
       <input
         className="input form-control"
         id={undefined}
-        onChange={[Function]}
         placeholder="Enter text"
         type="text"
       />
@@ -151,7 +148,7 @@ exports[`can upvote a post 2`] = `
       >
         <a
           className="navbar-brand"
-          href="#"
+          href="/#"
         >
           Mini Reddit
         </a>
@@ -167,7 +164,6 @@ exports[`can upvote a post 2`] = `
       <input
         className="input form-control"
         id={undefined}
-        onChange={[Function]}
         placeholder="Enter text"
         type="text"
       />
@@ -197,7 +193,7 @@ exports[`should render a couple posts 1`] = `
       >
         <a
           className="navbar-brand"
-          href="#"
+          href="/#"
         >
           Mini Reddit
         </a>
@@ -213,7 +209,6 @@ exports[`should render a couple posts 1`] = `
       <input
         className="input form-control"
         id={undefined}
-        onChange={[Function]}
         placeholder="Enter text"
         type="text"
       />
