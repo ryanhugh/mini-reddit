@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Home from './Home';
 
+// Initial entry point for JS. This file was copied from Search NEU. 
+
 const root = document.getElementById('app');
 function createApp() {
   return (

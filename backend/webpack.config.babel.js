@@ -7,6 +7,8 @@ const rootDir = path.join(__dirname, '..');
 let isProd = process.env.PROD
 let isDev = !isProd
 
+// This is the webpack config for compiling the frontend. It was copied from Search NEU. Some changes were made for this project. 
+
 export default {
   devtool: isProd ? 'source-map' : 'cheap-modules-eval-source-map',
 

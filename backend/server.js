@@ -46,6 +46,8 @@ app.use(function (req, res, next) {
 }.bind(this))
 
 
+// This is the beginning of the code that was written for this project
+
 // Create a new instance of the Topics. This model is used to keep track of the posts. 
 let topics = new Topics();
 
@@ -91,7 +93,7 @@ app.get('/topics', function (req, res) {
 })
 
 
-
+// This is the end of the code that was written custom for this project. 
 
 let middleware;
 
