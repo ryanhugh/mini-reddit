@@ -2,6 +2,7 @@ import React from 'react';
 import CSSModules from 'react-css-modules';
 import { Panel, Navbar, FormControl , Button  } from 'react-bootstrap';
 import css from './Home.css'
+import request from './request'
 
 // These were taken from here: https://www.iconfinder.com/search/?q=arrow
 import down from './down.svg'
@@ -25,46 +26,13 @@ class Home extends React.Component {
     this.fetchTopics();
   }
 
-  async request(url, body) {
-    return new Promise((resolve, reject) => {
-      const xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function onreadystatechange() {
-        if (xmlhttp.readyState !== 4) {
-          return;
-        }
-
-        if (xmlhttp.status !== 200) {
-          console.error('There was an error downloading', url, body);
-          reject();
-          return;
-        }
-
-        resolve(JSON.parse(xmlhttp.response));
-      };
-
-      let method = 'GET'
-      if (body) {
-        method = 'POST'
-      }
-
-      xmlhttp.open(method, url, true);
-      xmlhttp.setRequestHeader('Content-Type', 'application/json')
-      if (body) {
-        xmlhttp.send(JSON.stringify(body));
-      } else {
-        xmlhttp.send();
-      }
-    });
-  }
 
   async fetchTopics() {
-    const topics = await this.request('/topics');
+    const topics = await request.main('/topics');
 
     this.setState({
       topics: topics
     })
-
-    console.log(topics)
   }
 
   async onSubmit () {
@@ -73,7 +41,7 @@ class Home extends React.Component {
     }
 
 
-    await this.request('/newPost', {
+    await request.main('/newPost', {
         text: this.state.text,
     })
 
@@ -85,7 +53,7 @@ class Home extends React.Component {
   }
 
   async upvote(id) {
-    await this.request('/upvote', {
+    await request.main('/upvote', {
         id: id
     })
 
@@ -93,7 +61,7 @@ class Home extends React.Component {
     this.fetchTopics();
   }
   async downvote(id) {
-    await this.request('/downvote', {
+    await request.main('/downvote', {
         id: id
     })
 
@@ -102,6 +70,9 @@ class Home extends React.Component {
   }
 
   render() {
+    if (!this.state.topics) {
+      return;
+    }
 
     // Sort the topics. 
     let sortedTopics = this.state.topics.sort(function (a, b) {
