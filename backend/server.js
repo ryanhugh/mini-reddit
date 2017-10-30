@@ -45,9 +45,11 @@ app.use(function (req, res, next) {
   next()
 }.bind(this))
 
+
+// Create a new instance of the Topics. This model is used to keep track of the posts. 
 let topics = new Topics();
 
-
+// Endpoint for submitting a new post. 
 app.post('/newPost', function (req, res) {
   if (req.body.text === undefined) {
     res.send("Invalid text.")
@@ -59,7 +61,7 @@ app.post('/newPost', function (req, res) {
   res.send(JSON.stringify({status:'OK'}))
 })
 
-
+// Endpoint for upvoting a post
 app.post('/upvote', function (req, res) {
   if (req.body.id === undefined) {
     res.send("Invalid id.")
@@ -72,7 +74,7 @@ app.post('/upvote', function (req, res) {
 
 })
 
-
+// Endpoint for downvoting a post. 
 app.post('/downvote', function (req, res) {
   if (req.body.id === undefined) {
     res.send("Invalid id.")
@@ -83,7 +85,7 @@ app.post('/downvote', function (req, res) {
   res.send(JSON.stringify({status:'OK'}))
 })
 
-
+// Endpoint for getting the list of topics. 
 app.get('/topics', function (req, res) {
   res.send(JSON.stringify(topics.getTopics()))
 })

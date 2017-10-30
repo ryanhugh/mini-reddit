@@ -3,12 +3,17 @@ import renderer from 'react-test-renderer';
 
 import Home from './Home';
 
+// Unit tests for Home.js
+
+// Mock out the request file with Jest's mocking tools to ensure that real XMLHttpRequests are not sent.
 jest.mock('./request');
 
 it('should render a couple posts', () => {
 
   const tree = renderer.create(<Home></Home>)
 
+  // Use Jest's snapshotting feature to ensure that the DOM does not change. 
+  // Jest saves these files in the __snapshots__ folder. 
   expect(tree).toMatchSnapshot();
 });
 

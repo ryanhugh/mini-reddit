@@ -1,19 +1,28 @@
 
 
-
-// This is a list of all the topics. They are kept in order that they are added
-
-
-// Could optimize for either upvotes and downvotes (hash map/list where nothing moves) to make vote changing O(1) but would have to sort every render O(n*log(n))
-// Could also optimize for sorting (keep topics sorted) but then voting would be complicated (O(n) to find the topic and then worst case O(n) to insert this topic into the correct spot)
-// Additional features, such as the ability to exit topics, would be easier 
+// Model to keep track of the topics. 
 
 
 class Topics {
 
   constructor(props) {
 
-    // Array to keep track of all the posts. 
+    // There are a couple different ways that it is possible to keep track of these topics. 
+
+    // It would be possible to optimize for either direct topic access and store the topics in a hash map or optimize for sorting times and keep the topics in a list.
+    //      This would make vote changing O(1) because we know where every item is, but would have to sort the topics ever time they are retrieved from the server. 
+
+    // It would also be possible to keep the items sorted in memory. This would mean that the topics would not have to be sorted every time they are processed.
+    //      However, it would mean that changing any information about topics is more complicated. This would require a linear scan of all the objects to find the one that the user is editing. 
+    //      Then, once it is found, we may have to change the topic's location in the array if the score of the topic was changed. 
+
+    // It would also be possible to have multiple data structures referencing the same objects. This would be complicated, however. 
+
+    // I chose to stick with a simple array of topics to avoid over-engineering this problem. 
+    // More optimizations could be done if we are expecting a very large number of topics or if the requirements change. 
+
+
+    // Array to keep track of all the topics. 
     this.topics = [];
   }
 
@@ -26,6 +35,7 @@ class Topics {
     })
   }
 
+  // Increase the score of a topic. 
   upvote(id) {
    if (!this.topics[id]) {
       res.send("Invalid id.")
@@ -35,7 +45,7 @@ class Topics {
     this.topics[id].score ++;
   }
 
-
+  // Decrease the score of a topic. 
   downvote(id) {
    if (!this.topics[id]) {
       res.send("Invalid id.")
