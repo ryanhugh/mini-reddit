@@ -1,8 +1,5 @@
 node_modules/
 yarn-error.log
-cache
 dist
-sandbox.js
 public
 *.log
-courses.json
