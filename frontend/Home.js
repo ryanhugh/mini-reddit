@@ -133,8 +133,12 @@ class Home extends React.Component {
                 </span>
 
                 <span className={ css.imgContainer }>
-                  <img src={ up } className={ css.arrowUp } onClick={ upvote } alt='Upvote' />
-                  <img src={ down } className={ css.arrowDown } onClick={ downvote } alt='Downvote' />
+                  <span onClick={ upvote } role='button' tabIndex={ 0 }>
+                    <img src={ up } className={ css.arrowUp } alt='Upvote' />
+                  </span>
+                  <span onClick={ downvote } role='button' tabIndex={ 0 }>
+                    <img src={ down } className={ css.arrowDown } alt='Downvote' />
+                  </span>
                 </span>
 
                 <span className={ css.text }>
