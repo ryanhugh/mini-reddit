@@ -63,6 +63,7 @@
     "react-bootstrap": "^0.31.5",
     "react-css-modules": "^4.1.0",
     "react-dom": "^16.0.0",
+    "react-test-renderer": "^16.0.0",
     "react-tooltip": "^3.2.6",
     "request": "^2.81.0",
     "request-promise-native": "^1.0.3",

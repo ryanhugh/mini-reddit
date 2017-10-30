@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render a couple posts 1`] = `
+exports[`can downvote a post 1`] = `
 <div>
   <nav
     className="navbar navbar-default"
@@ -46,7 +46,145 @@ exports[`should render a couple posts 1`] = `
 </div>
 `;
 
-exports[`should render a couple posts 2`] = `
+exports[`can downvote a post 2`] = `
+<div>
+  <nav
+    className="navbar navbar-default"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="navbar-header"
+      >
+        <a
+          className="navbar-brand"
+          href="#"
+        >
+          Mini Reddit
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div
+    className="container bs-docs-container bs-docs-single-col-container"
+  >
+    <form
+      className="form"
+    >
+      <input
+        className="input form-control"
+        id={undefined}
+        onChange={[Function]}
+        placeholder="Enter text"
+        type="text"
+      />
+      <button
+        className="submitButton btn btn-default"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`can upvote a post 1`] = `
+<div>
+  <nav
+    className="navbar navbar-default"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="navbar-header"
+      >
+        <a
+          className="navbar-brand"
+          href="#"
+        >
+          Mini Reddit
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div
+    className="container bs-docs-container bs-docs-single-col-container"
+  >
+    <form
+      className="form"
+    >
+      <input
+        className="input form-control"
+        id={undefined}
+        onChange={[Function]}
+        placeholder="Enter text"
+        type="text"
+      />
+      <button
+        className="submitButton btn btn-default"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`can upvote a post 2`] = `
+<div>
+  <nav
+    className="navbar navbar-default"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="navbar-header"
+      >
+        <a
+          className="navbar-brand"
+          href="#"
+        >
+          Mini Reddit
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div
+    className="container bs-docs-container bs-docs-single-col-container"
+  >
+    <form
+      className="form"
+    >
+      <input
+        className="input form-control"
+        id={undefined}
+        onChange={[Function]}
+        placeholder="Enter text"
+        type="text"
+      />
+      <button
+        className="submitButton btn btn-default"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`should render a couple posts 1`] = `
 <div>
   <nav
     className="navbar navbar-default"

@@ -6,7 +6,6 @@ import Home from './Home';
 jest.mock('./request');
 
 
-
 it('should render a couple posts', () => {
 
   const tree = renderer.create(<Home></Home>)
@@ -15,20 +14,27 @@ it('should render a couple posts', () => {
 });
 
 
-it('should render a couple posts', () => {
+it('can downvote a post', () => {
 
-const component = renderer.create(
-    <Home>Facebook</Home>
-  );
+  const component = renderer.create(<Home></Home>);
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 
   // manually trigger the callback
-  tree.props.downvote();
+  component.getInstance().downvote();
 
-  // const tree = renderer.create(<Home></Home>).toJSON();
+  expect(component.toJSON()).toMatchSnapshot();
+});
 
-  // console.log(tree.props.__proto__)
 
-  // expect(tree).toMatchSnapshot();
+it('can upvote a post', () => {
+
+  const component = renderer.create(<Home></Home>);
+  let tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+
+  // manually trigger the callback
+  component.getInstance().upvote(1);
+
+  expect(component.toJSON()).toMatchSnapshot();
 });
