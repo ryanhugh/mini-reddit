@@ -6,7 +6,9 @@ Submittion for the Carousell codeing challenge
 
 # Overview
 
-The site itself is hosted on AWS. Node.js is used for the backend and React is used for the frontend. The topics are stored in RAM in Node.js on AWS. They are downloaded to the frontend when the user loads the page. When a user submits a new topic, it is uploaded to the server. Both the client and the server ensure that the text is valid. When the user upvotes or downvotes a topic, the client tells the server about the changes and then reloads the topics. The topics are sorted in the frontend. 
+The site itself is hosted on AWS. Node.js is used for the backend and React is used for the frontend. The topics are stored in RAM in Node.js on AWS. They are downloaded to the frontend when the user loads the page. When a user submits a new topic, it is uploaded to the server. Both the client and the server ensure that the text is valid. When the user upvotes or downvotes a topic, the client tells the server about the changes and then reloads the topics. The topics are sorted in the frontend. It is assumed that the number of topics is reasonably low. 
+
+
 
 # Credits
 
