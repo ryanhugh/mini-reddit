@@ -4,10 +4,10 @@ import webpack from 'webpack';
 
 const rootDir = path.join(__dirname, '..');
 
-let isProd = process.env.PROD
-let isDev = !isProd
+const isProd = process.env.PROD;
+const isDev = !isProd;
 
-// This is the webpack config for compiling the frontend. It was copied from Search NEU. Some changes were made for this project. 
+// This is the webpack config for compiling the frontend. It was copied from Search NEU. Some changes were made for this project.
 
 export default {
   devtool: isProd ? 'source-map' : 'cheap-modules-eval-source-map',
@@ -24,7 +24,7 @@ export default {
   output: {
     path: path.join(rootDir, '/public/'),
     filename: '[id]-[hash].js',
-    chunkFilename: '[id]-[hash].js'
+    chunkFilename: '[id]-[hash].js',
   },
 
   plugins: [
@@ -39,7 +39,7 @@ export default {
         'process.env': {
           PROD: 'false',
           DEV: 'true',
-          TESTS: 'false'
+          TESTS: 'false',
         },
       }),
     ] : [
@@ -49,8 +49,8 @@ export default {
           DEV: 'false',
           TESTS: 'false',
 
-          // This is needed so the production version of react is used. 
-          NODE_ENV: '"production"'
+          // This is needed so the production version of react is used.
+          NODE_ENV: '"production"',
         },
       }),
       new webpack.LoaderOptionsPlugin({
@@ -82,57 +82,57 @@ export default {
   module: {
     loaders: [
 
-    {
-      test: /\.js$/,
-      loader: 'babel-loader',
-      
-      include: path.join(rootDir, 'frontend'),
-    }, 
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
 
-    {
-      test: /\.js$/,
-      loader: 'babel-loader',
-      
-      include: path.join(rootDir, 'common'),
-    }, 
+        include: path.join(rootDir, 'frontend'),
+      },
+
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+
+        include: path.join(rootDir, 'common'),
+      },
 
     // This is the main css loader. Every css file loaded with this loader is processed with
     // css modules.
-    {
-      test: /\.css$/,
-      include: [
-        path.join(rootDir, 'frontend'),
-      ],
-      loaders: [
-        'style-loader',
-        'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
-      ],
-    }, 
+      {
+        test: /\.css$/,
+        include: [
+          path.join(rootDir, 'frontend'),
+        ],
+        loaders: [
+          'style-loader',
+          'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+        ],
+      },
 
-    // This css loader is for 3rd party css files. Load them globally. 
-    {
-      test: /\.css$/,
-      include: [
-        path.join(rootDir, 'node_modules'),
-      ],
-      loaders: [
-        'style-loader',
-        'css-loader?localIdentName=[path]___[name]__[local]___[hash:base64:5]',
-      ],
-    }, 
+    // This css loader is for 3rd party css files. Load them globally.
+      {
+        test: /\.css$/,
+        include: [
+          path.join(rootDir, 'node_modules'),
+        ],
+        loaders: [
+          'style-loader',
+          'css-loader?localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+        ],
+      },
 
 
     // Load other stuff as static files.
-    {
-      test: /\.(jpe?g|png|gif|svg)$/i,
-      loaders: [
-        'file-loader?name=[path][name].[ext]',
-      ],
-    }, {
-      test: /\.(eot|ttf|woff|woff2)$/i,
-      loaders: [
-        'file-loader?name=[name].[ext]&mimetype=application/x-font-truetype',
-      ],
-    }],
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+          'file-loader?name=[path][name].[ext]',
+        ],
+      }, {
+        test: /\.(eot|ttf|woff|woff2)$/i,
+        loaders: [
+          'file-loader?name=[name].[ext]&mimetype=application/x-font-truetype',
+        ],
+      }],
   },
 };

@@ -43,6 +43,7 @@ module.exports = {
     "no-plusplus": [0, {
       "allowForLoopAfterthoughts": true
     }],
+    "react/jsx-no-bind": 0,
 
     // Prevents using variables before they are defined. 
     "no-use-before-define": 1,

@@ -1,7 +1,7 @@
 
-// This file is a small wrapper around window.XMLHttpRequest 
+// This file is a small wrapper around window.XMLHttpRequest
 // This file assumes that every post request sends and receives JSON
-// and that every GET request receives JSON from the server. 
+// and that every GET request receives JSON from the server.
 
 async function request(url, body) {
   return new Promise((resolve, reject) => {
@@ -20,14 +20,14 @@ async function request(url, body) {
       resolve(JSON.parse(xmlhttp.response));
     };
 
-    let method = 'GET'
+    let method = 'GET';
     if (body) {
-      method = 'POST'
+      method = 'POST';
     }
 
     xmlhttp.open(method, url, true);
     if (body) {
-      xmlhttp.setRequestHeader('Content-Type', 'application/json')
+      xmlhttp.setRequestHeader('Content-Type', 'application/json');
       xmlhttp.send(JSON.stringify(body));
     } else {
       xmlhttp.send();

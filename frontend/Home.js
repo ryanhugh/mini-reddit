@@ -1,24 +1,24 @@
 import React from 'react';
 import CSSModules from 'react-css-modules';
-import { Panel, Navbar, FormControl , Button  } from 'react-bootstrap';
-import css from './Home.css'
-import request from './request'
+import { Panel, Navbar, FormControl, Button } from 'react-bootstrap';
+import css from './Home.css';
+import request from './request';
 
 // These SVG files were taken from here: https://www.iconfinder.com/search/?q=arrow
-import down from './down.svg'
-import up from './up.svg'
+import down from './down.svg';
+import up from './up.svg';
 
 // Home page component
 class Home extends React.Component {
   constructor(props) {
     super(props);
 
-    // Keep track of the state of this component. 
+    // Keep track of the state of this component.
     // Topics is the array of topics retrieved from the server.
-    // Input is the current value of the text box. 
+    // Input is the current value of the text box.
     this.state = {
       topics: [],
-      input: ''
+      input: '',
     };
 
     // Bind methods so 'this' references the instance of Home
@@ -31,29 +31,30 @@ class Home extends React.Component {
     this.fetchTopics();
   }
 
-  // Download all the topics from the server. 
-  async fetchTopics() {
-    const topics = await request('/topics');
 
-    this.setState({
-      topics: topics
-    })
-  }
-
-  // Verifies that the post if valid and then uploads it to the server. 
-  async onSubmit () {
+  // Verifies that the post if valid and then uploads it to the server.
+  async onSubmit() {
     if (!this.state.text || this.state.text.length > 255) {
       return;
     }
 
     await request('/newPost', {
-        text: this.state.text,
-    })
+      text: this.state.text,
+    });
 
     this.fetchTopics();
   }
 
-  // Updates this.state.text with the value from the text box. 
+  // Download all the topics from the server.
+  async fetchTopics() {
+    const topics = await request('/topics');
+
+    this.setState({
+      topics: topics,
+    });
+  }
+
+  // Updates this.state.text with the value from the text box.
   handleChange(e) {
     this.setState({ text: e.target.value });
   }
@@ -61,8 +62,8 @@ class Home extends React.Component {
   // Tells the server to upvote a post
   async upvote(id) {
     await request('/upvote', {
-        id: id
-    })
+      id: id,
+    });
 
 
     this.fetchTopics();
@@ -71,31 +72,29 @@ class Home extends React.Component {
   // Tells the server to downvote a post
   async downvote(id) {
     await request('/downvote', {
-        id: id
-    })
+      id: id,
+    });
 
 
     this.fetchTopics();
   }
 
-  // Renders the page. 
+  // Renders the page.
   render() {
     if (!this.state.topics) {
-      return;
+      return null;
     }
 
-    // Sort the topics. 
-    let sortedTopics = this.state.topics.sort(function (a, b) {
+    // Sort the topics.
+    const sortedTopics = this.state.topics.sort((a, b) => {
       if (a.score > b.score) {
-        return -1
+        return -1;
+      } else if (a.score < b.score) {
+        return 1;
       }
-      else if (a.score < b.score) {
-        return 1
-      }
-      else {
-        return 0
-      }
-    })
+
+      return 0;
+    });
 
 
     return (
@@ -103,43 +102,46 @@ class Home extends React.Component {
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="#">Mini Reddit</a>
+              <a href='/#'>Mini Reddit</a>
             </Navbar.Brand>
           </Navbar.Header>
         </Navbar>
 
-        <div className="container bs-docs-container bs-docs-single-col-container">
+        <div className='container bs-docs-container bs-docs-single-col-container'>
 
-          <form className={css.form}>
+          <form className={ css.form }>
             <FormControl
-              className={css.input}
-              type="text"
-              placeholder="Enter text"
-              onChange={this.handleChange}
+              className={ css.input }
+              type='text'
+              placeholder='Enter text'
+              onChange={ this.handleChange }
             />
-           
-            <Button onClick={this.onSubmit} className={css.submitButton}>
+
+            <Button onClick={ this.onSubmit } className={ css.submitButton }>
               Submit
             </Button>
           </form>
 
-          {this.state.topics.map((topic) => {
+          {sortedTopics.map((topic) => {
+            const upvote = this.upvote.bind(this, topic.id);
+            const downvote = this.downvote.bind(this, topic.id);
+
             return (
-              <Panel key={topic.id}>
-                <span className={css.score}>
+              <Panel key={ topic.id }>
+                <span className={ css.score }>
                   {topic.score}
                 </span>
 
-                <span className={css.imgContainer}>
-                  <img src={up} className={css.arrowUp} onClick={this.upvote.bind(this, topic.id)}/>
-                  <img src={down} className={css.arrowDown} onClick={this.downvote.bind(this, topic.id)}/>
+                <span className={ css.imgContainer }>
+                  <img src={ up } className={ css.arrowUp } onClick={ upvote } alt='Upvote' />
+                  <img src={ down } className={ css.arrowDown } onClick={ downvote } alt='Downvote' />
                 </span>
 
-                <span className={css.text}>
+                <span className={ css.text }>
                   {topic.text}
                 </span>
               </Panel>
-              )
+            );
           })}
         </div>
       </div>

@@ -9,19 +9,17 @@ import Home from './Home';
 jest.mock('./request');
 
 it('should render a couple posts', () => {
+  const tree = renderer.create(<Home />);
 
-  const tree = renderer.create(<Home></Home>)
-
-  // Use Jest's snapshotting feature to ensure that the DOM does not change. 
-  // Jest saves these files in the __snapshots__ folder. 
+  // Use Jest's snapshotting feature to ensure that the DOM does not change.
+  // Jest saves these files in the __snapshots__ folder.
   expect(tree).toMatchSnapshot();
 });
 
 
 it('can downvote a post', () => {
-
-  const component = renderer.create(<Home></Home>);
-  let tree = component.toJSON();
+  const component = renderer.create(<Home />);
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 
   // Trigger the callback
@@ -32,9 +30,8 @@ it('can downvote a post', () => {
 
 
 it('can upvote a post', () => {
-
-  const component = renderer.create(<Home></Home>);
-  let tree = component.toJSON();
+  const component = renderer.create(<Home />);
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 
   // Trigger the callback
