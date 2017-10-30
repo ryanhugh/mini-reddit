@@ -1,10 +1,9 @@
 import React from 'react';
-
 import renderer from 'react-test-renderer';
 
 import Home from './Home';
-jest.mock('./request');
 
+jest.mock('./request');
 
 it('should render a couple posts', () => {
 
@@ -20,8 +19,8 @@ it('can downvote a post', () => {
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 
-  // manually trigger the callback
-  component.getInstance().downvote();
+  // Trigger the callback
+  component.getInstance().downvote(1);
 
   expect(component.toJSON()).toMatchSnapshot();
 });
@@ -33,7 +32,7 @@ it('can upvote a post', () => {
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 
-  // manually trigger the callback
+  // Trigger the callback
   component.getInstance().upvote(1);
 
   expect(component.toJSON()).toMatchSnapshot();

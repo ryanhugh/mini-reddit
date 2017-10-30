@@ -14,10 +14,20 @@ class MockRequest {
     }
 
     else if (url == '/downvote') {
+      if (!this.data[body.id]) {
+        console.trace('Invalid id', body.id)
+        return;
+      }
+
       this.data[body.id].score --;
     }
 
     else if (url == '/upvote') {
+      if (!this.data[body.id]) {
+        console.trace('Invalid id', body.id)
+        return;
+      }
+
       this.data[body.id].score ++;
     }
     else if (url == '/newPost') {
