@@ -49,8 +49,27 @@ class Home extends React.Component {
   async fetchTopics() {
     const topics = await request('/topics');
 
+     // Sort the topics.
+    let sortedTopics = topics.sort((a, b) => {
+      if (a.score > b.score) {
+        return -1;
+      } else if (a.score < b.score) {
+        return 1;
+      }
+      else if (a.text > b.text) {
+        return -1;
+      }
+      else if (a.text < b.text) {
+        return -1;
+      }
+
+      return 0;
+    });
+
+    sortedTopics = sortedTopics.slice(0, 20)
+
     this.setState({
-      topics: topics,
+      topics: sortedTopics,
     });
   }
 
@@ -85,17 +104,6 @@ class Home extends React.Component {
       return null;
     }
 
-    // Sort the topics.
-    const sortedTopics = this.state.topics.sort((a, b) => {
-      if (a.score > b.score) {
-        return -1;
-      } else if (a.score < b.score) {
-        return 1;
-      }
-
-      return 0;
-    });
-
 
     return (
       <div>
@@ -122,7 +130,7 @@ class Home extends React.Component {
             </Button>
           </form>
 
-          {sortedTopics.map((topic) => {
+          {this.state.topics.map((topic) => {
             const upvote = this.upvote.bind(this, topic.id);
             const downvote = this.downvote.bind(this, topic.id);
 

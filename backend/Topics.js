@@ -26,6 +26,10 @@ class Topics {
   }
 
   addTopic(text) {
+    if (text.length > 255) {
+      return;
+    }
+    
     this.topics.push({
       text: text,
       score: 0,
