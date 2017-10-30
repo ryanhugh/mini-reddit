@@ -38,7 +38,6 @@ class Topics {
   // Increase the score of a topic. 
   upvote(id) {
    if (!this.topics[id]) {
-      res.send("Invalid id.")
       return;
     }
 
@@ -48,7 +47,6 @@ class Topics {
   // Decrease the score of a topic. 
   downvote(id) {
    if (!this.topics[id]) {
-      res.send("Invalid id.")
       return;
     }
 

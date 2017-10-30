@@ -97,7 +97,7 @@ app.get('/topics', function (req, res) {
 
 let middleware;
 
-if (process.env.DEV) {
+if (!process.env.PROD) {
 
   const compiler = webpack(webpackConfig);
   middleware = webpackMiddleware(compiler, {
